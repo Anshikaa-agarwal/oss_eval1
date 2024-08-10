@@ -1,0 +1,27 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up C++ compiler
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install g++
+        run: sudo apt-get install g++
+
+      - name: Compile and run
+        run: |
+          g++ -o prime_numbers prime_numbers.cpp
+          ./prime_numbers
